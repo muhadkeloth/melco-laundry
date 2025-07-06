@@ -15,20 +15,41 @@
       var scroll = $(window).scrollTop();
       if (scroll < 400) {
         $(".header-sticky").removeClass("sticky-bar");
-        $('#back-top').fadeOut(500);
+        // $('#back-top').fadeOut(500);
       } else {
         $(".header-sticky").addClass("sticky-bar");
-        $('#back-top').fadeIn(500);
+        // $('#back-top').fadeIn(500);
       }
     });
+      $(document).ready(function () {
+    const sections = ['home', 'services', 'about'];
+    
+    $(window).on('scroll', function () {
+      let scrollPosition = $(document).scrollTop();
+
+      for (let i = 0; i < sections.length; i++) {
+        const section = $('#' + sections[i]);
+        if (section.length) {
+          let sectionTop = section.offset().top - 40; 
+          let sectionBottom = sectionTop + section.outerHeight();
+
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            $('#navigation li').removeClass('active');
+            $('#navigation li a[href="#' + sections[i] + '"]').parent().addClass('active');
+          }
+        }
+      }
+    });
+  });
+
 
   // Scroll Up
-    $('#back-top a').on("click", function () {
-      $('body,html').animate({
-        scrollTop: 0
-      }, 800);
-      return false;
-    });
+    // $('#back-top a').on("click", function () {
+    //   $('body,html').animate({
+    //     scrollTop: 0
+    //   }, 800);
+    //   return false;
+    // });
   
 
 /* 3. slick Nav */
